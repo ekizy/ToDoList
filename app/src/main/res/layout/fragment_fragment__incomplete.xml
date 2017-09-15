@@ -1,23 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="layout.Fragment_Incomplete"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="6dp">
 
-    <TextView
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/button_add_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_input_add"
+        android:onClick="AddOnClick"/>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Incomplete Tasks"
-        android:textAlignment="center"/>
-
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="100dp"
-        android:layout_gravity="center"
-        android:text="Add"
-        />
-
+        android:layout_height="1dp"
+        android:backgroundTint="#a0a0a0"/>
    <ListView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
@@ -26,4 +29,7 @@
    </ListView>
 
 
-</LinearLayout>
+
+
+
+</RelativeLayout>

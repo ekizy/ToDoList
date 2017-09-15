@@ -7,7 +7,7 @@
         android:id="@+id/action_incomplete"
         android:enabled="true"
         android:icon="@drawable/ic_incomplete"
-        android:title="Uncompleted Tasks"
+        android:title="Incomplete Tasks"
         app:showAsAction="ifRoom" />
 
     <item

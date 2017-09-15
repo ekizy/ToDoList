@@ -1,17 +1,23 @@
 package layout;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.example.yusuf.todolist.CompleteTaskAdapter;
+import com.example.yusuf.todolist.DBHelper;
 import com.example.yusuf.todolist.R;
+import com.example.yusuf.todolist.Task;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,20 +64,35 @@ public class Fragment_Complete extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-
-
-        String [] completedTasks={"Task 1"," Task 2"," Task 3"," Task 4"};
-
-        ListAdapter completedTasksAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,completedTasks);
-
         View myFragmentView = inflater.inflate(R.layout.fragment_fragment__complete, container, false);
 
+        DBHelper dbHelper = new DBHelper(getActivity());
+
+        List<Task> tasks = dbHelper.getCompletedTasks();
+
         ListView completedListView=(ListView) myFragmentView.findViewById(R.id.completeList);
-        completedListView.setAdapter(completedTasksAdapter);
+
+        CompleteTaskAdapter customAdapter = new CompleteTaskAdapter(getActivity(),tasks,getContext());
+
+        completedListView.setAdapter(customAdapter);
 
         return myFragmentView;
     }
 
+
+    public Timestamp convertDateToTimestamp(String date)
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date tempDate = null;
+        try {
+            tempDate = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return new Timestamp(tempDate.getTime());
+    }
 
 
 
